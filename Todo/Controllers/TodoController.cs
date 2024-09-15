@@ -18,25 +18,47 @@ public class TodoController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddTodo([FromBody] TodoItem todo)
+    public async Task<ApiResponse<TodoItem>> AddTodo([FromBody] TodoItem todo)
     {
-        ApiResponse resonse = new ApiResponse();
+        ApiResponse<TodoItem> response = new();
         try
         {
             if (string.IsNullOrEmpty(todo.Id))
             {
                 todo.Id = ObjectId.GenerateNewId().ToString();
             }
-            var todoAdded = await _todoService.AddTodoAsync(todo);
-            resonse.Data = todoAdded;
+            response = await _todoService.AddTodoAsync(todo);
+           
         }
         catch (Exception e)
         {
-            resonse.IsSuccess = false;
+            response.IsSuccess = false;
+            response.Data = null;
+            response.StatusCode = 500;
         }
 
-        return Ok((resonse));
+        return response;
 
+    }
+
+    [HttpGet]
+    public async Task<ApiResponse<List<TodoItem>>> GetTodos()
+    {
+        ApiResponse<List<TodoItem>> response = new();
+
+        try
+        { 
+            response = await _todoService.GetTodosAsync();
+            
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.IsSuccess = false;
+            throw;
+        }
+
+        return response;
     }
 
 }

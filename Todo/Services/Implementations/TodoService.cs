@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Todo.Models;
 using Todo.Repositories.Contracts;
 using Todo.Services.Contracts;
@@ -14,9 +15,9 @@ public class TodoService: ITodoService
         _respositoryService = repository;
     }
 
-    public async Task<TodoItem> AddTodoAsync(TodoItem todo)
+    public async Task<ApiResponse<TodoItem>> AddTodoAsync(TodoItem todo)
     {
-        ApiResponse response = new ApiResponse();
+        ApiResponse<TodoItem> response = new();
         
         try
         {
@@ -33,26 +34,40 @@ public class TodoService: ITodoService
         response.IsSuccess = true;
         response.Message = "success";
 
-        return response.Data;
+        return response;
 
     }
-
-    public Task<IEnumerable<TodoItem>> GetTodosAsync()
+    
+    public async Task<ApiResponse<List<TodoItem>>> GetTodosAsync()
     {
-        throw new NotImplementedException();
+        ApiResponse<List<TodoItem>> response = new ();
+
+        try
+        {
+            var res = await  _respositoryService.GetAllAsync();
+            response.Data = res.ToList();
+            response.IsSuccess = true;
+        }
+        catch (Exception e)
+        {
+            response.IsSuccess = false;
+            response.Data = null;
+        }
+
+        return response;
     }
 
-    public Task<TodoItem> GetTodoByIdAsync(string id)
+    public Task<ApiResponse<TodoItem>> GetTodoByIdAsync(string id)
     {
         throw new NotImplementedException();
     }
     
-    public Task<TodoItem> UpdateTodoAsync(string id, TodoItem updatedTodo)
+    public Task<ApiResponse<TodoItem>> UpdateTodoAsync(string id, TodoItem updatedTodo)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteTodoAsync(string id)
+    public Task<ApiResponse<bool>> DeleteTodoAsync(string id)
     {
         throw new NotImplementedException();
     }

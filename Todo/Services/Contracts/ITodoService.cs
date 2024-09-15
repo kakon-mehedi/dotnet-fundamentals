@@ -6,14 +6,14 @@ namespace Todo.Services.Contracts;
 
 public interface ITodoService
 {
-    Task<TodoItem> AddTodoAsync(TodoItem todo);
+    Task<ApiResponse<TodoItem>> AddTodoAsync(TodoItem todo);
 
-    Task<IEnumerable<TodoItem>> GetTodosAsync();
+    Task<ApiResponse<List<TodoItem>>> GetTodosAsync();
 
-    Task<TodoItem> GetTodoByIdAsync(string id);
+    Task<ApiResponse<TodoItem>> GetTodoByIdAsync(string id);
 
-    Task<TodoItem> UpdateTodoAsync(string id, TodoItem updatedTodo);
+    Task<ApiResponse<TodoItem>> UpdateTodoAsync(string id, TodoItem updatedTodo);
 
-    Task<bool> DeleteTodoAsync(string id);
+    Task<ApiResponse<bool>> DeleteTodoAsync(string id);
     
 }

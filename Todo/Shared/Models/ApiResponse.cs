@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Todo.Shared.Models;
 
-public class ApiResponse
+public class ApiResponse<TResponseData>
 {
     public bool IsSuccess { get; set; } = true;
     
@@ -12,5 +12,5 @@ public class ApiResponse
 
     public int? TotalCount { get; set; } = 0;
 
-    public dynamic Data { get; set; }
+    public TResponseData? Data { get; set; }
 }
