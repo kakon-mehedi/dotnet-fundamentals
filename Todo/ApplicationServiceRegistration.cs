@@ -1,5 +1,6 @@
 using Todo.Repositories;
 using Todo.Services;
+using Todo.Shared;
 
 namespace Todo;
 
@@ -13,6 +14,7 @@ public static class ApplicationServiceRegistration
 
     public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSharedServices();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
