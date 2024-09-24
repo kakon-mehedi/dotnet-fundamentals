@@ -1,5 +1,5 @@
+using DotNetFundamentals.WebService;
 using Todo;
-using Todo.Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
