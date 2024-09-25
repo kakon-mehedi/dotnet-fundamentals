@@ -1,14 +1,12 @@
-using System;
-using DotNetFundamentals.Todo.Services.Models;
-
 namespace DotNetFundamentals.Todo.Commands;
 
 public class AddTodoCommand
 {
-public Todo Todo { get; set; }
+    public string Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
 
-    public AddTodoCommand(Todo todo)
-    {
-        Todo = todo;
-    }
+    public string OwnerName { get; set; }
+    
+    public bool IsCompleted { get; set; }
 }

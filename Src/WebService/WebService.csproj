@@ -15,6 +15,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.Services\Core.Services.csproj" />
       <ProjectReference Include="..\Todo\Todo.Services\Todo.Services.csproj" />
+      <ProjectReference Include="..\Todo\Todo.Commands\Todo.Commands.csproj" />
+      <ProjectReference Include="..\Todo\Todo.CommandHandlers\Todo.CommandHandlers.csproj" />
+      <ProjectReference Include="..\Todo\Todo.Queries\Todo.Queries.csproj" />
+      <ProjectReference Include="..\Todo\Todo.QueryHandlers\Todo.QueryHandlers.csproj" />
     </ItemGroup>
 
 </Project>

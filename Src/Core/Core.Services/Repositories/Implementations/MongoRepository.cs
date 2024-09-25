@@ -37,6 +37,12 @@ public class MongoRepository<T> : IRepository<T> where T : class
         return entity;
     }
 
+    public async Task<TResponse> AddAsync<TCommand, TResponse>(TCommand commnad)
+    {
+        await _collection.InsertOneAsync(commnad);
+        return commnad;
+    }
+
     public async Task UpdateAsync(string id, T entity)
     {
         await _collection.ReplaceOneAsync(Builders<T>.Filter.Eq("_id", id), entity);

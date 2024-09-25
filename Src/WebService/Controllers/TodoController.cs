@@ -1,58 +1,49 @@
-using DotnetFundamentals.Todo.Services;
+using DotNetFundamentals.Core.Services.Dispatchers;
 using DotNetFundamentals.Core.Services.Shared.Models;
-using DotNetFundamentals.Todo.Services.Models;
+using DotNetFundamentals.Todo.Commands;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class TodoController : Controller
 {
-    private readonly ITodoService _todoService; 
+    private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IQueryDispatcher _queryDispatcher;
     
-    public TodoController(ITodoService todoService)
+    public TodoController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
     {
-        _todoService = todoService;
+       _commandDispatcher = commandDispatcher;
+       _queryDispatcher = queryDispatcher;
     }
 
     [HttpPost]
-    public async Task<ApiResponse<TodoModel>> AddTodo([FromBody] TodoModel todo)
+    public async Task<ApiResponse> AddTodo([FromBody] AddTodoCommand command)
     {
-        ApiResponse<TodoModel> response = new();
+        ApiResponse response = new();
         try
         {
-            if (string.IsNullOrEmpty(todo.Id))
-            {
-                todo.Id = ObjectId.GenerateNewId().ToString();
-            }
-            response = await _todoService.AddTodoAsync(todo);
-           
+            response.Data =  await _commandDispatcher.DispatchAsync<AddTodoCommand, ApiResponse>(command);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            response.IsSuccess = false;
-            response.Data = null;
-            response.StatusCode = 500;
+            throw;
         }
 
         return response;
-
     }
 
     [HttpGet]
-    public async Task<ApiResponse<List<TodoModel>>> GetTodos()
+    public async Task<ApiResponse> GetTodos()
     {
-        ApiResponse<List<TodoModel>> response = new();
+        ApiResponse response = new();
 
         try
         { 
-            response = await _todoService.GetTodosAsync();
+            response.Data = await _queryDispatcher.DispatchAsync<GetTodosQuery, ApiResponse>(null);
             
         }
         catch (Exception e)
         {
-            response.Data = null;
-            response.IsSuccess = false;
             throw;
         }
 

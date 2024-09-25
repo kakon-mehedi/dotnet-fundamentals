@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # 
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Todo", "Todo", "{E562F07C-4DA0-4C11-8D15-1B6BCC939A3C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TodoCQRS", "TodoCQRS", "{E562F07C-4DA0-4C11-8D15-1B6BCC939A3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{02CAD38B-C3C4-41E4-8544-E0E95D3DF1EB}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.QueryHandlers", "Todo\Todo.QueryHandlers\Todo.QueryHandlers.csproj", "{10B551B2-87E2-4F96-9B94-26782FD0FDC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Services", "Todo\Todo.Services\Todo.Services.csproj", "{D204889F-32C1-4051-A789-31D03009C975}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Entities", "Core\Core.Entities\Core.Entities.csproj", "{78994FFB-E23A-4FE5-B3D2-4E9F5C107285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{D204889F-32C1-4051-A789-31D03009C975}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D204889F-32C1-4051-A789-31D03009C975}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D204889F-32C1-4051-A789-31D03009C975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78994FFB-E23A-4FE5-B3D2-4E9F5C107285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78994FFB-E23A-4FE5-B3D2-4E9F5C107285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78994FFB-E23A-4FE5-B3D2-4E9F5C107285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78994FFB-E23A-4FE5-B3D2-4E9F5C107285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,6 @@ Global
 		{43CB60ED-77EC-447D-AB61-E3A2A8C9BF72} = {E562F07C-4DA0-4C11-8D15-1B6BCC939A3C}
 		{10B551B2-87E2-4F96-9B94-26782FD0FDC0} = {E562F07C-4DA0-4C11-8D15-1B6BCC939A3C}
 		{D204889F-32C1-4051-A789-31D03009C975} = {E562F07C-4DA0-4C11-8D15-1B6BCC939A3C}
+		{78994FFB-E23A-4FE5-B3D2-4E9F5C107285} = {8D85C026-0462-4E4A-B069-7C4DABB0261D}
 	EndGlobalSection
 EndGlobal

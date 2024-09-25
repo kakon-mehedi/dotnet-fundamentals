@@ -2,12 +2,12 @@ using System.Linq.Expressions;
 
 namespace DotNetFundamentals.Core.Services.Repositories;
 
-public interface IRepository<T> where T : class
+public interface IRepository<TCollectionName> where TCollectionName : class
 {
-    Task<T> GetByIdAsync(string id);
-    Task<IEnumerable<T>> GetAllAsync();
-    Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate);
-    Task<T> AddAsync(T entity);
-    Task UpdateAsync(string id, T entity);
+    Task<TCollectionName> GetByIdAsync(string id);
+    Task<IEnumerable<TCollectionName>> GetAllAsync();
+    Task<IEnumerable<TCollectionName>> GetAllAsync(Expression<Func<TCollectionName, bool>> predicate);
+    Task<TResponse> AddAsync<TCommand, TResponse>(TCommand command);
+    Task UpdateAsync(string id, TCollectionName entity);
     Task DeleteAsync(string id);
 }

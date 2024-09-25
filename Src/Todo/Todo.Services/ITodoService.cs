@@ -1,20 +1,16 @@
 
 using DotNetFundamentals.Core.Services.Shared.Models;
-using DotNetFundamentals.Todo.Services.Models;
+using DotNetFundamentals.Todo.Commands;
 
 namespace DotnetFundamentals.Todo.Services;
 
 
 public interface ITodoService
 {
-    Task<ApiResponse<TodoModel>> AddTodoAsync(TodoModel todo);
-
-    Task<ApiResponse<List<TodoModel>>> GetTodosAsync();
-
-    Task<ApiResponse<TodoModel>> GetTodoByIdAsync(string id);
-
-    Task<ApiResponse<TodoModel>> UpdateTodoAsync(string id, TodoModel updatedTodo);
-
-    Task<ApiResponse<bool>> DeleteTodoAsync(string id);
+    Task<ApiResponse> AddTodoAsync(AddTodoCommand command);
+    Task<ApiResponse> UpdateTodoAsync(UpdateTodoCommand command);
+    Task<ApiResponse> DeleteTodoAsync(DeleteTodoCommand command);
+    Task<ApiResponse> GetTodosAsync();
+    Task<ApiResponse> GetTodoByIdAsync(string id);
     
 }

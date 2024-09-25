@@ -1,0 +1,6 @@
+namespace DotNetFundamentals.Core.Services.Dispatchers;
+
+public interface IQueryDispatcher
+{
+    Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery? query);
+}

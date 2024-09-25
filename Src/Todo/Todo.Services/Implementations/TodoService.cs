@@ -1,26 +1,27 @@
 
 using DotNetFundamentals.Core.Services.Repositories;
 using DotNetFundamentals.Core.Services.Shared.Models;
-using DotNetFundamentals.Todo.Services.Models;
+using DotNetFundamentals.Core.Entities;
+using DotNetFundamentals.Todo.Commands;
 
 namespace DotnetFundamentals.Todo.Services.Implementations;
 
 public class TodoService: ITodoService
 {
-    private readonly IRepository<TodoModel> _respositoryService;
+    private readonly IRepository<TodoItem> _repositoryService;
     
-    public TodoService(IRepository<TodoModel> repository)
+    public TodoService(IRepository<TodoItem> repository)
     {
-        _respositoryService = repository;
+        _repositoryService = repository;
     }
 
-    public async Task<ApiResponse<TodoModel>> AddTodoAsync(TodoModel todo)
+    public async Task<ApiResponse> AddTodoAsync(AddTodoCommand command)
     {
-        ApiResponse<TodoModel> response = new();
+        ApiResponse response = new();
         
         try
         {
-            var res = await _respositoryService.AddAsync(todo);
+            var res = await _repositoryService.AddAsync<AddTodoCommand, ApiResponse>(command);
             response.Data = res;
         }
         catch (Exception e)
@@ -37,13 +38,13 @@ public class TodoService: ITodoService
 
     }
     
-    public async Task<ApiResponse<List<TodoModel>>> GetTodosAsync()
+    public async Task<ApiResponse> GetTodosAsync()
     {
-        ApiResponse<List<TodoModel>> response = new ();
+        ApiResponse response = new ();
 
         try
         {
-            var res = await  _respositoryService.GetAllAsync();
+            var res = await  _repositoryService.GetAllAsync();
             response.Data = res.ToList();
             response.IsSuccess = true;
         }
@@ -56,17 +57,17 @@ public class TodoService: ITodoService
         return response;
     }
 
-    public Task<ApiResponse<TodoModel>> GetTodoByIdAsync(string id)
+    public Task<ApiResponse> GetTodoByIdAsync(string id)
     {
         throw new NotImplementedException();
     }
     
-    public Task<ApiResponse<TodoModel>> UpdateTodoAsync(string id, TodoModel updatedTodo)
+    public Task<ApiResponse> UpdateTodoAsync(UpdateTodoCommand command)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApiResponse<bool>> DeleteTodoAsync(string id)
+    public Task<ApiResponse> DeleteTodoAsync(DeleteTodoCommand command)
     {
         throw new NotImplementedException();
     }
