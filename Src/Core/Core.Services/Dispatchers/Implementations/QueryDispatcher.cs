@@ -17,11 +17,10 @@ public class QueryDispatcher : IQueryDispatcher
 
         if (handler == null)
         {
-             throw new InvalidOperationException($"Query handler for {typeof(TQuery).Name} not found.");
+            throw new InvalidOperationException($"Query handler for {typeof(TQuery).Name} not found.");
         }
 
         return handler.HandleAsync(query);
-
 
     }
 
@@ -31,10 +30,10 @@ public class QueryDispatcher : IQueryDispatcher
 
         var queryName = typeof(TQuery).Name;
         var responseName = typeof(TResponse).Name;
-        
+
         if (handler == null)
         {
-             throw new InvalidOperationException($"Query handler for {typeof(TQuery).Name} not found.");
+            throw new InvalidOperationException($"Query handler for {typeof(TQuery).Name} not found.");
         }
 
         return handler.HandleAsync();

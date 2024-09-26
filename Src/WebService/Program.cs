@@ -3,7 +3,7 @@ using Todo;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCoreServices(builder.Configuration);
+builder.Services.AddBootstrapServices(builder.Configuration);
 builder.Services.RegisterApplicationServices();
 
 var app = builder.Build();

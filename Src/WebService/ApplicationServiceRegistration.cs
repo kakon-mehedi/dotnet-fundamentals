@@ -11,14 +11,19 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
-        services.AddTodoServices();
+        services.AddApplicationServices();
         services.AddApplicationCommandHandlers();
         return services;
     }
 
-    public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services) {
+        services.AddTodoServices();
+        return services;
+    }
+
+    public static IServiceCollection AddBootstrapServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSharedServices();
+        services.AddCoreServices();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -29,13 +34,13 @@ public static class ApplicationServiceRegistration
 
     public static IServiceCollection AddApplicationCommandHandlers(this IServiceCollection services)
     {
-
+        // Creating new array of Assemblies 
         var assembliesToScan = new[]
         {
                 typeof(AddTodoCommandHandler).Assembly,  // As we are selecting the assembly here. so This will add Todo.CommandHandler projects all command handlers.
 
                 typeof(GetAllTodosQueryHandler).Assembly
-                   
+
         };
 
         var handlerTypes = assembliesToScan

@@ -5,7 +5,7 @@ namespace DotNetFundamentals.Core.Services;
 
 public static class CoreServiceRegistration
 {
-     public static IServiceCollection AddSharedServices(this IServiceCollection services)
+     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddDispatcherServices();
         services.AddTransient<RequestLoggingMiddleware>();
