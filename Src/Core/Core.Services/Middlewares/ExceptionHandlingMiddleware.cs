@@ -21,13 +21,14 @@ public class ExceptionHandlingMiddleware: IMiddleware
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         Console.WriteLine($"Exception: {exception.Message}");
+        Console.WriteLine($"StackTrace", exception.StackTrace);
 
         var errorResponse = new ErrorResponse
         {
             StatusCode = context.Response.StatusCode = 500, // Internal Server Error
             Message = "An unexpected error occurred.",
             DetailedMessage = exception.Message, // Optionally include stack trace for detailed errors
-            StackTrace = exception.StackTrace
+            StackTrace = exception.StackTrace?.ToString()
         };
 
         context.Response.ContentType = "application/json";

@@ -16,7 +16,9 @@ public static class RepositoryServiceRegistration
         var database = mongoClient.GetDatabase(configuration["DatabaseInfo:DatabaseName"]);
 
         services.AddSingleton<IMongoDatabase>(database);
-        services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));
+        //services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>)); // For generic repo purpose
+        
+        services.AddScoped(typeof(IRepository), typeof(MongoRepository));
 
         return services;
     }

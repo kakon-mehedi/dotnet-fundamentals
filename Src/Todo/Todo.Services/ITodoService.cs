@@ -10,7 +10,7 @@ public interface ITodoService
     Task<ApiResponse> AddTodoAsync(AddTodoCommand command);
     Task<ApiResponse> UpdateTodoAsync(UpdateTodoCommand command);
     Task<ApiResponse> DeleteTodoAsync(DeleteTodoCommand command);
-    Task<ApiResponse> GetTodosAsync();
+    Task<ApiResponse> GetTodosAsync<TEntity>();
     Task<ApiResponse> GetTodoByIdAsync(string id);
     
 }

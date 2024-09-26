@@ -39,7 +39,7 @@ public class TodoController : Controller
 
         try
         { 
-            response.Data = await _queryDispatcher.DispatchAsync<GetTodosQuery, ApiResponse>(null);
+            response.Data = await _queryDispatcher.DispatchAsync<GetAllTodosQuery, ApiResponse>();
             
         }
         catch (Exception e)

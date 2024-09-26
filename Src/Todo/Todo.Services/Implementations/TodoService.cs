@@ -3,14 +3,15 @@ using DotNetFundamentals.Core.Services.Repositories;
 using DotNetFundamentals.Core.Services.Shared.Models;
 using DotNetFundamentals.Core.Entities;
 using DotNetFundamentals.Todo.Commands;
+using DotNetFundamentals.Todo.Services.Mappings;
 
 namespace DotnetFundamentals.Todo.Services.Implementations;
 
 public class TodoService: ITodoService
 {
-    private readonly IRepository<TodoItem> _repositoryService;
+    private readonly IRepository _repositoryService;
     
-    public TodoService(IRepository<TodoItem> repository)
+    public TodoService(IRepository repository)
     {
         _repositoryService = repository;
     }
@@ -21,13 +22,12 @@ public class TodoService: ITodoService
         
         try
         {
-            var res = await _repositoryService.AddAsync<AddTodoCommand, ApiResponse>(command);
-            response.Data = res;
+            var todo = command.MapToTodoItem();
+            await _repositoryService.InsertAsync<TodoItem>(todo);
         }
         catch (Exception e)
         {
-            response.IsSuccess = false;
-            response.Message = e.Message;
+            throw;
 
         }
 
@@ -38,14 +38,14 @@ public class TodoService: ITodoService
 
     }
     
-    public async Task<ApiResponse> GetTodosAsync()
+    public async Task<ApiResponse> GetTodosAsync<TodoItem>()
     {
         ApiResponse response = new ();
 
         try
         {
-            var res = await  _repositoryService.GetAllAsync();
-            response.Data = res.ToList();
+            var res = await  _repositoryService.GetAllAsync<TodoItem>();
+            response.Data = res;
             response.IsSuccess = true;
         }
         catch (Exception e)

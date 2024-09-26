@@ -2,6 +2,7 @@ using System.Reflection;
 using DotNetFundamentals.Core.Services;
 using DotNetFundamentals.Core.Services.Dispatchers;
 using DotNetFundamentals.Todo.CommandHandlers;
+using DotNetFundamentals.Todo.QueryHandlers;
 using DotNetFundamentals.Todo.Services;
 
 namespace DotNetFundamentals.WebService;
@@ -32,8 +33,10 @@ public static class ApplicationServiceRegistration
         var assembliesToScan = new[]
         {
                 typeof(AddTodoCommandHandler).Assembly,  // As we are selecting the assembly here. so This will add Todo.CommandHandler projects all command handlers.
+
+                typeof(GetAllTodosQueryHandler).Assembly
                    
-            };
+        };
 
         var handlerTypes = assembliesToScan
             .SelectMany(assembly => assembly.GetTypes())
