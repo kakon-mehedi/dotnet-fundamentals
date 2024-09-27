@@ -48,16 +48,9 @@ public class TodoService : ITodoService
     {
         ApiResponseModel response = new();
 
-        try
-        {
-            var res = await _repositoryService.GetAllAsync<TodoItem>();
-            response.SetData(res);
-        }
-        catch (Exception e)
-        {
-            response.SetError(500, "Error while fetching data");
-        }
-
+        var res = await _repositoryService.GetAllAsync<TodoItem>();
+        response.SetData(res);
+    
         return response;
     }
 
