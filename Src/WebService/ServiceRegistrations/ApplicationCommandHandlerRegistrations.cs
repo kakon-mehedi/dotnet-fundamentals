@@ -7,22 +7,27 @@ namespace DotNetFundamentals.WebService.ServiceRegistrations;
 
 public static class ApplicationCommandHandlerRegistrations
 {
-     public static IServiceCollection AddApplicationCommandHandlers(this IServiceCollection services)
+    public static IServiceCollection AddApplicationCommandHandlers(this IServiceCollection services)
     {
-        // Creating new array of Assemblies 
+        // Creating new array of Assemblies
         var assembliesToScan = new[]
         {
-                typeof(AddTodoCommandHandler).Assembly,  // As we are selecting the assembly here. so This will add Todo.CommandHandler projects all command handlers.
-
-                typeof(GetAllTodosQueryHandler).Assembly
-
+            typeof(AddTodoCommandHandler).Assembly, // As we are selecting the assembly here. so This will add Todo.CommandHandler projects all command handlers.
+            typeof(GetAllTodosQueryHandler).Assembly,
         };
 
         var handlerTypes = assembliesToScan
             .SelectMany(assembly => assembly.GetTypes())
-            .Where(t => t.GetInterfaces().Any(i => i.IsGenericType &&
-                (i.GetGenericTypeDefinition() == typeof(ICommandHandler<,>) ||
-                i.GetGenericTypeDefinition() == typeof(IQueryHandler<,>))))
+            .Where(t =>
+                t.GetInterfaces()
+                    .Any(i =>
+                        i.IsGenericType
+                        && (
+                            i.GetGenericTypeDefinition() == typeof(ICommandHandler<,>)
+                            || i.GetGenericTypeDefinition() == typeof(IQueryHandler<,>)
+                        )
+                    )
+            )
             .ToList();
 
         foreach (var handlerType in handlerTypes)
