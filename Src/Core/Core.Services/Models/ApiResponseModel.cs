@@ -2,11 +2,11 @@ namespace DotNetFundamentals.Core.Services.Models;
 
 public class ApiResponseModelExtended
 {
-    public string Message { get; set; }
+    public string Message { get; set; } = string.Empty;
     public bool IsSuccess => Errors.Count > 0 ? false : true; //{ get; private set; }
-    public int HttpStatusCode { get; set; }
-    public int TotalCount { get; private set; }
-    public dynamic Data { get; private set; }
+    public int HttpStatusCode { get; set; } = 200;
+    public int TotalCount { get; private set; } = 0;
+    public dynamic Data { get; private set; } = string.Empty;
 
     public ApiResponseModelExtended()
     {
@@ -21,26 +21,26 @@ public class ApiResponseModelExtended
         return this;
     }
 
-    public ApiResponseModelExtended SetSuccess(dynamic data, int statuscode = 200)
+    public ApiResponseModelExtended SetSuccess(dynamic data, int statusCode = 200)
     {
         Errors = new List<ValidationError>();
         Data = data;
-        HttpStatusCode = statuscode;
+        HttpStatusCode = statusCode;
         return this;
     }
 
-    public ApiResponseModelExtended SetSuccess(dynamic data, string message, int statuscode = 0)
+    public ApiResponseModelExtended SetSuccess(dynamic data, string message, int statusCode = 0)
     {
         Errors = new List<ValidationError>();
         Data = data;
         Message = message;
-        HttpStatusCode = statuscode;
+        HttpStatusCode = statusCode;
         return this;
     }
 
-    public ApiResponseModelExtended SetStatusCode(int statuscode)
+    public ApiResponseModelExtended SetStatusCode(int statusCode)
     {
-        HttpStatusCode = statuscode;
+        HttpStatusCode = statusCode;
         return this;
     }
 
@@ -78,6 +78,6 @@ public class ApiResponseModelExtended
 
 public class ValidationError
 {
-    public string ErrorCode { get; set; }
-    public string ErrorMessage { get; set; }
+    public string ErrorCode { get; set; } = string.Empty;
+    public string ErrorMessage { get; set; } = string.Empty;
 }

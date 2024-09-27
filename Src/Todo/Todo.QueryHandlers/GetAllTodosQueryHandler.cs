@@ -1,6 +1,6 @@
 using System;
 using DotnetFundamentals.Todo.Services;
-using DotNetFundamentals.Core.Entities;
+using DotNetFundamentals.Core.Entities.Todo;
 using DotNetFundamentals.Core.Services.Dispatchers;
 using DotNetFundamentals.Core.Services.Shared.Models;
 

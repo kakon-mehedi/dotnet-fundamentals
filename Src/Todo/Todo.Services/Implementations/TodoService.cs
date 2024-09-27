@@ -1,9 +1,9 @@
 
 using DotNetFundamentals.Core.Services.Repositories;
 using DotNetFundamentals.Core.Services.Shared.Models;
-using DotNetFundamentals.Core.Entities;
 using DotNetFundamentals.Todo.Commands;
 using DotNetFundamentals.Todo.Services.Mappings;
+using DotNetFundamentals.Core.Entities.Todo;
 
 namespace DotnetFundamentals.Todo.Services.Implementations;
 
