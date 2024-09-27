@@ -17,12 +17,12 @@ public class TodoController : Controller
     }
 
     [HttpPost]
-    public async Task<ApiResponse> AddTodo([FromBody] AddTodoCommand command)
+    public async Task<ApiResponseModel> AddTodo([FromBody] AddTodoCommand command)
     {
-        ApiResponse response = new();
+        ApiResponseModel response = new();
         try
         {
-            response.Data =  await _commandDispatcher.DispatchAsync<AddTodoCommand, ApiResponse>(command);
+            response.Data =  await _commandDispatcher.DispatchAsync<AddTodoCommand, ApiResponseModel>(command);
         }
         catch (Exception ex)
         {
@@ -33,13 +33,13 @@ public class TodoController : Controller
     }
 
     [HttpGet]
-    public async Task<ApiResponse> GetTodos()
+    public async Task<ApiResponseModel> GetTodos()
     {
-        ApiResponse response = new();
+        ApiResponseModel response = new();
 
         try
         { 
-            response.Data = await _queryDispatcher.DispatchAsync<GetAllTodosQuery, ApiResponse>();
+            response.Data = await _queryDispatcher.DispatchAsync<GetAllTodosQuery, ApiResponseModel>();
             
         }
         catch (Exception e)

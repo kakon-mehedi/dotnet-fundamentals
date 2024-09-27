@@ -1,55 +1,21 @@
-namespace DotNetFundamentals.Core.Services.Models;
+using System.Net;
 
-public class ApiResponseModelExtended
+namespace DotNetFundamentals.Core.Services.Shared.Models;
+
+public class ApiResponseModel
 {
     public string Message { get; set; } = string.Empty;
-    public bool IsSuccess => Errors.Count > 0 ? false : true; //{ get; private set; }
     public int HttpStatusCode { get; set; } = 200;
     public int TotalCount { get; private set; } = 0;
     public dynamic Data { get; private set; } = string.Empty;
+    public List<ValidationError> Errors { get; set; } = new List<ValidationError>();
+    public bool IsSuccess => Errors.Count > 0 ? false : true;
 
-    public ApiResponseModelExtended()
+    public ApiResponseModel SetError(string statusCode, string errorMessage)
     {
-        Errors = new List<ValidationError>();
-    }
-
-    public List<ValidationError> Errors { get; set; }
-
-    public ApiResponseModelExtended SetSuccess()
-    {
-        Errors = new List<ValidationError>();
-        return this;
-    }
-
-    public ApiResponseModelExtended SetSuccess(dynamic data, int statusCode = 200)
-    {
-        Errors = new List<ValidationError>();
-        Data = data;
-        HttpStatusCode = statusCode;
-        return this;
-    }
-
-    public ApiResponseModelExtended SetSuccess(dynamic data, string message, int statusCode = 0)
-    {
-        Errors = new List<ValidationError>();
-        Data = data;
-        Message = message;
-        HttpStatusCode = statusCode;
-        return this;
-    }
-
-    public ApiResponseModelExtended SetStatusCode(int statusCode)
-    {
-        HttpStatusCode = statusCode;
-        return this;
-    }
-
-    public ApiResponseModelExtended SetError(string code, string errorMessage)
-    {
-        
         var validationError = new ValidationError
         {
-            ErrorCode = code,
+            ErrorCode = statusCode,
             ErrorMessage = errorMessage
         };
 
@@ -57,27 +23,19 @@ public class ApiResponseModelExtended
         return this;
     }
 
-    public ApiResponseModelExtended SetErrors(List<ValidationError> validationErrors)
+    public ApiResponseModel SetSuccess(dynamic data, int statusCode = 200)
     {
-        Errors = validationErrors;
+        Errors = new List<ValidationError>();
+        Data = data;
+        HttpStatusCode = statusCode;
         return this;
     }
 
-    public ApiResponseModelExtended SetMessage(string message)
+    public class ValidationError
     {
-        Message = message;
-        return this;
+        public string ErrorCode { get; set; } = string.Empty;
+        public string ErrorMessage { get; set; } = string.Empty;
     }
 
-    public ApiResponseModelExtended SetTotalCount(int count)
-    {
-        TotalCount = count;
-        return this;
-    }
-}
 
-public class ValidationError
-{
-    public string ErrorCode { get; set; } = string.Empty;
-    public string ErrorMessage { get; set; } = string.Empty;
 }

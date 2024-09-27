@@ -1,6 +1,6 @@
 namespace DotNetFundamentals.Core.Entities.Todo;
 
-public class TodoItem
+public class TodoItem: EntityBase
 {
     public string Id { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;

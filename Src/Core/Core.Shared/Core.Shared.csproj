@@ -1,14 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Shared\Core.Shared.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>DotNetFundamentals.Core.Entities</RootNamespace>
+    <RootNamespace>DotNetFundamentals.Core.Services</RootNamespace>
   </PropertyGroup>
 
 </Project>

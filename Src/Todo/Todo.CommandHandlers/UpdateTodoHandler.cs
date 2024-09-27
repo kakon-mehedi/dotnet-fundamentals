@@ -6,7 +6,7 @@ using DotNetFundamentals.Todo.Commands;
 
 namespace DotNetFundamentals.Todo.CommandHandlers;
 
-public class UpdateTodoHandler: ICommandHandler<UpdateTodoCommand, ApiResponse>
+public class UpdateTodoHandler: ICommandHandler<UpdateTodoCommand, ApiResponseModel>
 {
     private readonly ITodoService _todoService;
 
@@ -15,7 +15,7 @@ public class UpdateTodoHandler: ICommandHandler<UpdateTodoCommand, ApiResponse>
         _todoService = todoService;
     }
 
-    public async Task<ApiResponse> HandleAsync(UpdateTodoCommand command)
+    public async Task<ApiResponseModel> HandleAsync(UpdateTodoCommand command)
     {
        return await _todoService.UpdateTodoAsync(command);
     }

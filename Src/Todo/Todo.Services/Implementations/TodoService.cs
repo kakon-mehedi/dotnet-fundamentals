@@ -16,9 +16,9 @@ public class TodoService: ITodoService
         _repositoryService = repository;
     }
 
-    public async Task<ApiResponse> AddTodoAsync(AddTodoCommand command)
+    public async Task<ApiResponseModel> AddTodoAsync(AddTodoCommand command)
     {
-        ApiResponse response = new();
+        ApiResponseModel response = new();
         
         try
         {
@@ -38,9 +38,9 @@ public class TodoService: ITodoService
 
     }
     
-    public async Task<ApiResponse> GetTodosAsync<TodoItem>()
+    public async Task<ApiResponseModel> GetTodosAsync<TodoItem>()
     {
-        ApiResponse response = new ();
+        ApiResponseModel response = new ();
 
         try
         {
@@ -57,17 +57,17 @@ public class TodoService: ITodoService
         return response;
     }
 
-    public Task<ApiResponse> GetTodoByIdAsync(string id)
+    public Task<ApiResponseModel> GetTodoByIdAsync(string id)
     {
         throw new NotImplementedException();
     }
     
-    public Task<ApiResponse> UpdateTodoAsync(UpdateTodoCommand command)
+    public Task<ApiResponseModel> UpdateTodoAsync(UpdateTodoCommand command)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApiResponse> DeleteTodoAsync(DeleteTodoCommand command)
+    public Task<ApiResponseModel> DeleteTodoAsync(DeleteTodoCommand command)
     {
         throw new NotImplementedException();
     }

@@ -6,7 +6,7 @@ using DotNetFundamentals.Core.Services.Shared.Models;
 
 namespace DotNetFundamentals.Todo.QueryHandlers;
 
-public class GetAllTodosQueryHandler : IQueryHandler<GetAllTodosQuery, ApiResponse>
+public class GetAllTodosQueryHandler : IQueryHandler<GetAllTodosQuery, ApiResponseModel>
 {
     private readonly ITodoService _service;
     public GetAllTodosQueryHandler(ITodoService todoService)
@@ -14,12 +14,12 @@ public class GetAllTodosQueryHandler : IQueryHandler<GetAllTodosQuery, ApiRespon
         _service = todoService;
     }
 
-    public Task<ApiResponse> HandleAsync(GetAllTodosQuery? query)
+    public Task<ApiResponseModel> HandleAsync(GetAllTodosQuery? query)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ApiResponse> HandleAsync()
+    public async Task<ApiResponseModel> HandleAsync()
     {
        return await  _service.GetTodosAsync<TodoItem>();
     }
