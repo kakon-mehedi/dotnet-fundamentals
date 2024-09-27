@@ -55,7 +55,7 @@ public class TodoService : ITodoService
         }
         catch (Exception e)
         {
-            response.SetError("500", "Error while fetching data");
+            response.SetError(500, "Error while fetching data");
         }
 
         return response;

@@ -11,7 +11,7 @@ public class ApiResponseModel
     public List<ValidationError> Errors { get; set; } = new List<ValidationError>();
     public bool IsSuccess => Errors.Count > 0 ? false : true;
 
-    public ApiResponseModel SetError(string statusCode, string errorMessage)
+    public ApiResponseModel SetError(int statusCode, string errorMessage)
     {
         var validationError = new ValidationError
         {
@@ -52,7 +52,7 @@ public class ApiResponseModel
 
     public class ValidationError
     {
-        public string ErrorCode { get; set; } = string.Empty;
+        public int ErrorCode { get; set; }
         public string ErrorMessage { get; set; } = string.Empty;
     }
 

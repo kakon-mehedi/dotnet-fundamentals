@@ -11,10 +11,10 @@ public class AddTodoCommandValidator : IValidator<AddTodoCommand>
     {
         var response = new ApiResponseModel();
 
-        if (string.IsNullOrWhiteSpace(model.Title)) response.SetError("0", "Title can not be empty");
-        if (string.IsNullOrWhiteSpace(model.Description)) response.SetError("0", "Description can not be empty");
-        if (string.IsNullOrWhiteSpace(model.OwnerName)) response.SetError("0", "OwnerName can not be empty");
-        if (model.IsCompleted) response.SetError("0", "Completed can not be true initially");
+        if (string.IsNullOrWhiteSpace(model.Title)) response.SetError(0, "Title can not be empty");
+        if (string.IsNullOrWhiteSpace(model.Description)) response.SetError(0, "Description can not be empty");
+        if (string.IsNullOrWhiteSpace(model.OwnerName)) response.SetError(0, "OwnerName can not be empty");
+        if (model.IsCompleted) response.SetError(0, "Completed can not be true initially");
 
         return response;
     }
