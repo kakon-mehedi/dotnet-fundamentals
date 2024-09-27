@@ -1,4 +1,6 @@
+using DotNetFundamentals.Core.Services.Auth;
 using DotNetFundamentals.Core.Services.Dispatchers;
+using DotNetFundamentals.Core.Services.Injectors;
 using DotNetFundamentals.Core.Services.Middlewares;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +14,8 @@ public static class CoreServiceRegistration
         services.AddDispatcherServices();
         services.AddMiddlewareServices();
         services.AddMongoDbRepositoryServices(configuration);
+        services.AddInjectorServices();
+        services.AddAuthServices();
         
         return services;
     }

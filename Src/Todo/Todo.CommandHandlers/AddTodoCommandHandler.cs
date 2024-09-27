@@ -31,6 +31,8 @@ public class AddTodoCommandHandler : ICommandHandler<AddTodoCommand, ApiResponse
             response = await _todoService.AddTodoAsync(command);
         }
 
+        response.SetStatusCode(response.IsSuccess ? 200 : 400);
+
         return response;
     }
 }
