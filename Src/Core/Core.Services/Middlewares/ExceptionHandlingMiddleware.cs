@@ -38,8 +38,8 @@ public class ExceptionHandlingMiddleware: IMiddleware
 
 public class ErrorResponse
 {
-    public int StatusCode { get; set; }
-    public string Message { get; set; }
-    public string DetailedMessage { get; set; } // Optional, you can include stack trace or error details
+    public int StatusCode { get; set; } = 500;
+    public string Message { get; set; } = string.Empty;
+    public string DetailedMessage { get; set; } = string.Empty; // Optional, you can include stack trace or error details
     public dynamic? StackTrace { get; set; }
 }

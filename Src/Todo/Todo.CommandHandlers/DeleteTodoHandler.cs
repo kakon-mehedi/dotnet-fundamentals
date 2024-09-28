@@ -6,7 +6,7 @@ using DotNetFundamentals.Todo.Commands;
 
 namespace DotNetFundamentals.Todo.CommandHandlers;
 
-public class DeleteTodoHandler: ICommandHandler<DeleteTodoCommand, ApiResponse>
+public class DeleteTodoHandler: ICommandHandler<DeleteTodoCommand, ApiResponseModel>
 {
     private readonly ITodoService _todoService;
 
@@ -15,7 +15,7 @@ public class DeleteTodoHandler: ICommandHandler<DeleteTodoCommand, ApiResponse>
         _todoService = todoService;
     }
 
-    public async Task<ApiResponse> HandleAsync(DeleteTodoCommand command)
+    public async Task<ApiResponseModel> HandleAsync(DeleteTodoCommand command)
     {
         return await _todoService.DeleteTodoAsync(command);
     }

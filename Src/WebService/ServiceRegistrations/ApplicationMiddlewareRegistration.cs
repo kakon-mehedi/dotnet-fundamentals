@@ -1,7 +1,7 @@
 using DotNetFundamentals.Core.Services;
 
 
-namespace Todo;
+namespace DotNetFundamentals.WebService.ServiceRegistrations;
 
 public static class ApplicationMiddlewareRegistration
 {

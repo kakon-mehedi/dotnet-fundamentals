@@ -1,5 +1,4 @@
-using System;
-using DotNetFundamentals.Core.Entities;
+using DotNetFundamentals.Core.Entities.Todo;
 using DotNetFundamentals.Todo.Commands;
 using MongoDB.Bson;
 

@@ -8,6 +8,7 @@ namespace DotNetFundamentals.Core.Services;
 
 public static class RepositoryServiceRegistration
 {
+    
     public static IServiceCollection AddMongoDbRepositoryServices(this IServiceCollection services, IConfiguration configuration)
     {
         var mongoDbConnectionString = configuration["DatabaseInfo:MongoDbConnectionString"];

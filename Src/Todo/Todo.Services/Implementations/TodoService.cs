@@ -1,28 +1,37 @@
 
 using DotNetFundamentals.Core.Services.Repositories;
 using DotNetFundamentals.Core.Services.Shared.Models;
-using DotNetFundamentals.Core.Entities;
 using DotNetFundamentals.Todo.Commands;
 using DotNetFundamentals.Todo.Services.Mappings;
+using DotNetFundamentals.Core.Entities.Todo;
+using DotNetFundamentals.Core.Services.Injectors;
 
 namespace DotnetFundamentals.Todo.Services.Implementations;
 
-public class TodoService: ITodoService
+public class TodoService : ITodoService
 {
     private readonly IRepository _repositoryService;
-    
-    public TodoService(IRepository repository)
+    private readonly ICommonValueInjectorService _commonValueInjectorService;
+
+    private readonly IMetadataInjectorService _metadataInjectorService;
+
+    public TodoService(IRepository repository, ICommonValueInjectorService commonValueInjectorService, IMetadataInjectorService metadataInjectorService)
     {
         _repositoryService = repository;
+        _commonValueInjectorService = commonValueInjectorService;
+        _metadataInjectorService = metadataInjectorService;
+
     }
 
-    public async Task<ApiResponse> AddTodoAsync(AddTodoCommand command)
+    public async Task<ApiResponseModel> AddTodoAsync(AddTodoCommand command)
     {
-        ApiResponse response = new();
-        
+        ApiResponseModel response = new();
+        var todo = command.MapToTodoItem();
+        _commonValueInjectorService.Inject<TodoItem>(todo);
+        _metadataInjectorService.Inject<TodoItem>(todo);
+
         try
         {
-            var todo = command.MapToTodoItem();
             await _repositoryService.InsertAsync<TodoItem>(todo);
         }
         catch (Exception e)
@@ -31,43 +40,31 @@ public class TodoService: ITodoService
 
         }
 
-        response.IsSuccess = true;
-        response.Message = "success";
-
-        return response;
+        return response.SetSuccess(todo);
 
     }
-    
-    public async Task<ApiResponse> GetTodosAsync<TodoItem>()
+
+    public async Task<ApiResponseModel> GetTodosAsync<TodoItem>()
     {
-        ApiResponse response = new ();
+        ApiResponseModel response = new();
 
-        try
-        {
-            var res = await  _repositoryService.GetAllAsync<TodoItem>();
-            response.Data = res;
-            response.IsSuccess = true;
-        }
-        catch (Exception e)
-        {
-            response.IsSuccess = false;
-            response.Data = null;
-        }
-
+        var res = await _repositoryService.GetAllAsync<TodoItem>();
+        response.SetData(res);
+    
         return response;
     }
 
-    public Task<ApiResponse> GetTodoByIdAsync(string id)
-    {
-        throw new NotImplementedException();
-    }
-    
-    public Task<ApiResponse> UpdateTodoAsync(UpdateTodoCommand command)
+    public Task<ApiResponseModel> GetTodoByIdAsync(string id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApiResponse> DeleteTodoAsync(DeleteTodoCommand command)
+    public Task<ApiResponseModel> UpdateTodoAsync(UpdateTodoCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ApiResponseModel> DeleteTodoAsync(DeleteTodoCommand command)
     {
         throw new NotImplementedException();
     }
