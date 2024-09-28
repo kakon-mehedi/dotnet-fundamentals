@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using DotNetFundamentals.Core.Services.Dispatchers;
 using DotNetFundamentals.Todo.CommandHandlers;
 using DotNetFundamentals.Todo.QueryHandlers;
@@ -10,11 +11,11 @@ public static class ApplicationCommandHandlerRegistrations
     public static IServiceCollection AddApplicationCommandHandlers(this IServiceCollection services)
     {
         // Creating new array of Assemblies
-        var assembliesToScan = new[]
-        {
+        Assembly[] assembliesToScan = [
             typeof(AddTodoCommandHandler).Assembly, // As we are selecting the assembly here. so This will add Todo.CommandHandler projects all command handlers.
             typeof(GetAllTodosQueryHandler).Assembly,
-        };
+        ];
+       
 
         var handlerTypes = assembliesToScan
             .SelectMany(assembly => assembly.GetTypes())
